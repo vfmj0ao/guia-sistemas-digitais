@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia de estudo — Introdução a Sistemas Digitais</title>
+  <style>
+    :root {
+      --bg: #111214;
+      --surface: #1a1b1e;
+      --elevated: #222326;
+      --text: #ececec;
+      --muted: #a0a0a0;
+      --faint: #7a7a7a;
+      --accent: #4d8dff;
+      --line: #2e2f33;
+      --warn: #c9a227;
+      --ok: #3d9a64;
+      --info: #3d7ad9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
+    h1 { font-size: 24px; font-weight: 650; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    h3 { font-size: 15px; margin: 22px 0 8px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+    .small { color: var(--faint); font-size: 13px; }
+    .stats {
+      display: flex; gap: 28px; flex-wrap: wrap; margin: 20px 0 18px;
+    }
+    .stat strong { display: block; font-size: 20px; }
+    .stat span { font-size: 12px; color: var(--muted); }
+    .stat.warn strong { color: var(--warn); }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 22px; }
+    .tab {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .tab.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .panel { display: none; }
+    .panel.on { display: block; }
+    .callout {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 12px 0 18px;
+    }
+    .callout.warn { border-left: 3px solid var(--warn); }
+    .callout.info { border-left: 3px solid var(--info); }
+    .callout.ok { border-left: 3px solid var(--ok); }
+    .callout b { display: block; margin-bottom: 4px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 10px 0 18px;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    tr:nth-child(even) td { background: var(--surface); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .card h4 { margin: 0 0 6px; font-size: 14px; }
+    .card p { margin: 0; font-size: 13px; color: var(--muted); }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: var(--elevated);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .bar {
+      display: flex; align-items: center; gap: 10px; margin: 6px 0;
+      font-size: 13px;
+    }
+    .bar span.label { width: 240px; flex-shrink: 0; color: var(--muted); }
+    .bar .track { flex: 1; height: 10px; background: var(--elevated); border-radius: 99px; overflow: hidden; }
+    .bar .fill { height: 100%; background: var(--accent); }
+    .bar span.n { width: 28px; text-align: right; }
+    .btns { display: flex; gap: 8px; margin-top: 12px; }
+    button.primary, button.secondary {
+      border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 14px;
+    }
+    button.primary { background: var(--accent); color: #fff; }
+    button.secondary { background: var(--elevated); color: var(--text); }
+    .share {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+    @media (max-width: 700px) {
+      .cards { grid-template-columns: 1fr; }
+      .bar span.label { width: 140px; }
+      .stats { gap: 16px; }
+    }
+    @media print {
+      .tabs, .btns, .share { display: none !important; }
+      .panel { display: block !important; page-break-after: always; }
+      body { background: #fff; color: #111; }
+      th, td, .card, .callout { border-color: #ccc; }
+      .card, .callout, tr:nth-child(even) td { background: #f6f6f6; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Guia de estudo — Introdução a Sistemas Digitais</h1>
+    <p class="muted">Compilado a partir das 3 listas e das aulas do prof. Murilo (UFMS/CPAN). Abre em qualquer navegador — celular incluso.</p>
+    <p class="share">Dica: no computador, use Ctrl+P → “Salvar como PDF” se quiser um arquivo para imprimir.</p>
+
+    <div class="stats">
+      <div class="stat"><strong>3 listas</strong><span>Floyd + Cap.1B + Arduino</span></div>
+      <div class="stat warn"><strong>Arduino</strong><span>Bloco mais cobrado</span></div>
+      <div class="stat"><strong>Analógico x digital</strong><span>Base de quase tudo</span></div>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+    <div id="content"></div>
+  </div>
+
+  <script>
+    const TOPICOS = [
+      ["mapa", "Mapa da prova"],
+      ["analogico", "Analógico x digital"],
+      ["binario", "Binário e pulsos"],
+      ["portas", "Portas lógicas"],
+      ["blocos", "Blocos digitais"],
+      ["cis", "CIs e PLDs"],
+      ["arduino", "Arduino"],
+      ["treino", "Treino rápido"],
+    ];
+
+    const QUESTOES = [
+      ["Uma rampa é analógica ou digital? E uma escada?", "Rampa = analógica (contínua). Escada = digital (degraus discretos)."],
+      ["Cite a principal limitação das técnicas digitais.", "O mundo real é analógico (e processar bits leva tempo)."],
+      ["Quais duas unidades formam a CPU?", "Unidade de controle + unidade lógica/aritmética (ULA)."],
+      ["Como se mede o tempo de subida de um pulso?", "Do ponto de 10% até o de 90% da amplitude."],
+      ["Se T = 4 ms, qual é a frequência?", "f = 1/T = 250 Hz."],
+      ["AND gera ALTO quando…? OR gera ALTO quando…?", "AND: todas as entradas ALTAS. OR: pelo menos uma ALTA."],
+      ["Qual acrônimo NÃO é lógica programável: PAL, GAL, ABEL, FPGA?", "ABEL — é linguagem de software. CUPL também."],
+      ["15.000 portas equivalentes: SSI, MSI, LSI, VLSI ou ULSI?", "VLSI (10.000 a 100.000)."],
+      ["Para que serve setup() e para que serve loop()?", "setup() configura uma vez. loop() repete o programa para sempre."],
+      ["analogRead(A0) retorna 700 com limiar 500. O LED liga?", "Sim. 700 > 500 → digitalWrite HIGH."],
+    ];
+
+    let q = 0, revelado = false;
+
+    function table(headers, rows) {
+      return `<table><thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${
+        rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")
+      }</tbody></table>`;
+    }
+
+    const html = {
+      mapa: `
+        <div class="callout warn"><b>O que priorizar hoje</b>
+          As listas batem em três eixos: (1) conversar sobre analógico vs digital sem errar as definições;
+          (2) medir pulsos (subida, descida, largura, frequência, ciclo de trabalho);
+          (3) ler e explicar código Arduino linha a linha. CIs, PLDs e instrumentos são memorização objetiva — caem, mas com menos peso.
+        </div>
+        <h2>Quantas perguntas caem em cada assunto</h2>
+        <p class="small">Contagem por item das listas Lista Cap 1 Floyd, Lista1B e Lista Arduino (subitens do Arduino contados à parte).</p>
+        ${[
+          ["Arduino (funções e código)", 30],
+          ["Analógico x digital", 13],
+          ["Formas de onda / pulso", 10],
+          ["Funções digitais (mux, memória…)", 10],
+          ["Binário e níveis lógicos", 7],
+          ["Lógica programável (PLD)", 6],
+          ["Organização do computador", 6],
+          ["Portas NOT / AND / OR", 5],
+          ["Instrumentos de teste", 5],
+          ["Circuitos integrados", 4],
+          ["Serial x paralelo", 3],
+        ].map(([l,n]) => `<div class="bar"><span class="label">${l}</span><div class="track"><div class="fill" style="width:${(n/30)*100}%"></div></div><span class="n">${n}</span></div>`).join("")}
+        <h2>Como a matéria se encaixa</h2>
+        <p>O mundo real é contínuo (analógico). O computador só entende dois estados (digital). Quase toda a disciplina é sobre essa ponte: como representar, processar, armazenar e medir uns e zeros — e, no Arduino, como ligar isso a um LED, um botão e um sensor.</p>
+        <div class="cards">
+          <div class="card"><h4>Cap. 1 Floyd</h4><p>Grandezas, vantagens/limites, 5 unidades do microcomputador, bits, pulsos, serial vs paralelo.</p></div>
+          <div class="card"><h4>Cap. 1B</h4><p>Portas lógicas, comparador, mux/demux, memória, CIs (SSI…ULSI), PLDs e osciloscópio.</p></div>
+          <div class="card"><h4>Aulas Arduino</h4><p>IDE, setup/loop, pinos digitais e analógicos, Serial, protoboard e componentes.</p></div>
+        </div>
+      `,
+      analogico: `
+        <h2>Analógico x digital</h2>
+        <p>Analógico = valores contínuos, como uma rampa: você pode parar em qualquer altura. Digital = valores discretos, como uma escada: só existem degraus. Binário é o digital mais simples: só 0 e 1.</p>
+        ${table(["Exemplo da lista","Tipo","Por quê"], [
+          ["Subir por uma rampa","Analógico","Altura varia sem saltos"],
+          ["Subir por uma escada","Digital","Só existem degraus"],
+          ["Corrente num motor","Analógico","Varia de forma contínua"],
+          ["Altura marcada de 1 em 1 cm","Digital","Passos de 1 cm"],
+          ["Marca na parede (contínua)","Analógico","Qualquer posição"],
+          ["Volume de areia no balde","Digital","Grãos discretos"],
+          ["Volume de água no balde","Analógico","Líquido contínuo"],
+        ])}
+        <h3>Vantagens digitais (decore estas 6)</h3>
+        <p>Projeto mais fácil (só HIGH/LOW) · armazenamento fácil · precisão se mantém · dá para programar · menos afetado por ruído · CIs com mais dispositivos internos.</p>
+        <div class="callout info"><b>A limitação que a prova cobra</b>
+          O mundo real é analógico. Por isso todo sistema “digital” (celular, CD, Arduino) precisa converter: microfone/sensor → analógico → ADC → bits → processamento → DAC ou PWM → de novo o mundo real. Processar bits também leva tempo.
+        </div>
+        <h3>Cinco unidades do microcomputador</h3>
+        ${table(["Unidade","Função em uma frase"], [
+          ["Entrada","Traz dados do mundo (teclado, sensor, botão)"],
+          ["Memória","Guarda programa e dados"],
+          ["Controle","Busca e interpreta instruções, manda nos outros"],
+          ["ULA (aritmética/lógica)","Contas e decisões"],
+          ["Saída","Mostra o resultado (tela, LED, som)"],
+        ])}
+        <p>CPU = Controle + ULA. Um CI que contém uma CPU chama-se microprocessador. Circuito com memória “lembra” o estado anterior; sem memória, a saída depende só das entradas atuais.</p>
+      `,
+      binario: `
+        <h2>Binário, níveis e pulsos</h2>
+        <p>Bit = binary digit = 0 ou 1. Em circuito: ALTO (HIGH) = 1, BAIXO (LOW) = 0. Não é um valor único de tensão — é uma faixa. Entre as faixas existe uma zona proibida (não pode haver sobreposição).</p>
+        <p>ALTO, ALTO, BAIXO, ALTO, BAIXO, BAIXO, BAIXO, ALTO vira <code>11010001</code>. BAIXO, BAIXO, BAIXO, ALTO, BAIXO, ALTO, BAIXO, ALTO, BAIXO vira <code>000101010</code>.</p>
+        <h3>Anatomia de um pulso</h3>
+        <svg viewBox="0 0 640 200" width="100%" height="180" role="img" aria-label="Pulso digital">
+          <rect width="640" height="200" fill="#1a1b1e"/>
+          <line x1="40" y1="40" x2="40" y2="170" stroke="#555"/>
+          <line x1="40" y1="150" x2="620" y2="150" stroke="#555"/>
+          <polyline fill="none" stroke="#4d8dff" stroke-width="2.5" points="40,150 120,150 170,50 380,50 430,150 620,150"/>
+          <text x="48" y="36" font-size="11" fill="#a0a0a0">ALTO (1)</text>
+          <text x="48" y="172" font-size="11" fill="#a0a0a0">BAIXO (0)</text>
+          <text x="130" y="110" font-size="11" fill="#7a7a7a">tr 10%→90%</text>
+          <text x="240" y="36" font-size="11" fill="#7a7a7a">tw (50% a 50%)</text>
+          <text x="390" y="110" font-size="11" fill="#7a7a7a">tf 90%→10%</text>
+        </svg>
+        <p class="small">Pulso típico da prova: subida (tr) de 10% a 90% da amplitude; descida (tf) de 90% a 10%; largura (tw) entre os pontos de 50%. Amplitude = topo − linha de base (ex.: 8 V − 1 V = 7 V).</p>
+        <div class="cards">
+          <div class="card"><h4>Fórmulas que caem</h4><p>Frequência <code>f = 1 / T</code><br>Período <code>T = 1 / f</code><br>Ciclo de trabalho <code>D = (tw / T) × 100%</code></p></div>
+          <div class="card"><h4>Serial x paralelo</h4><p>Serial: um bit por vez, menos fios, mais lento. Paralelo: todos os bits ao mesmo tempo, mais fios, mais rápido. Tempo total serial = 8 × tempo de um bit; paralelo = tempo de um bit.</p></div>
+        </div>
+        <p>Clock é uma onda periódica que marca o ritmo. Diagrama de temporização mostra várias linhas (clock, dados, sinais) alinhadas no tempo.</p>
+      `,
+      portas: `
+        <h2>Portas lógicas — as três operações</h2>
+        <p>Porta lógica = circuito que executa uma operação. Entradas à esquerda, saída à direita. AND e OR têm no mínimo duas entradas; NOT tem uma (e se chama inversor).</p>
+        ${table(["Porta","Saída ALTA quando…","Frase mental"], [
+          ["NOT (inversor)","A entrada é BAIXA","Inverte: 1 vira 0, 0 vira 1"],
+          ["AND","TODAS as entradas são ALTAS","E: só passa se todos concordam"],
+          ["OR","PELO MENOS UMA entrada é ALTA","OU: basta um sim"],
+        ])}
+        <h3>Tabela-verdade de 2 entradas</h3>
+        ${table(["A","B","NOT A","A AND B","A OR B"], [
+          ["0","0","1","0","0"],
+          ["0","1","1","0","1"],
+          ["1","0","0","0","1"],
+          ["1","1","0","1","1"],
+        ])}
+      `,
+      blocos: `
+        <h2>Blocos que montam um sistema digital</h2>
+        ${table(["Bloco","O que faz","Analogia"], [
+          ["Comparador","Diz se A = B, A > B ou A < B","Balança de dois pratos"],
+          ["Somador / ULA","Adição, subtração, multiplicação, divisão","Calculadora"],
+          ["Codificador","Decimal/tecla → código binário","Teclado: tecla 7 vira 0111"],
+          ["Decodificador","Código binário → forma humana","Display de 7 segmentos"],
+          ["Mux","Várias entradas → uma saída, no tempo","Régua de trilhos: escolhe um trem"],
+          ["Demux","Uma entrada → várias saídas","O contrário do mux"],
+          ["Flip-flop","Guarda 1 bit","Interruptor que trava"],
+          ["Registrador","Vários flip-flops = um grupo de bits","Fileira de interruptores"],
+          ["Contador","Conta pulsos; precisa lembrar o valor atual","Catraca"],
+          ["ROM / RAM / disco / fita","Quatro tipos clássicos de armazenamento","Permanente vs temporário"],
+        ])}
+        <div class="callout info"><b>Registrador serial da lista 1B</b>
+          8 bits zerados. Entram 0101 começando pelo 1, deslocando à direita (bit novo entra pela esquerda): 1 → 10000000; 0 → 01000000; 1 → 10100000; 0 → 01010000. Conteúdo final: <code>01010000</code>.
+        </div>
+      `,
+      cis: `
+        <h2>Circuitos integrados e lógica programável</h2>
+        <p>CI monolítico = circuito inteiro num chip de silício. DIP = pinos em duas fileiras, passam por furos (PTH). SMT = solda na superfície, economiza espaço; SOIC é um SMT com pinos em “asa de gaivota”.</p>
+        ${table(["Classe","Portas equivalentes","Exemplo da lista"], [
+          ["SSI","até 10","10 → SSI"],
+          ["MSI","10 a 100","75 → MSI"],
+          ["LSI","100 a 10.000","500 → LSI"],
+          ["VLSI","10.000 a 100.000","15.000 → VLSI"],
+          ["ULSI","mais de 100.000","200.000 → ULSI"],
+        ])}
+        <h3>PLDs — o que é hardware e o que é software</h3>
+        <p>Categorias principais: PLD e FPGA. PLD se divide em SPLD (simples: PAL programável uma vez, GAL reprogramável) e CPLD (vários SPLDs no mesmo chip). FPGA é mais densa. ABEL e CUPL são linguagens de software — não são lógica programável.</p>
+        <p>Fluxo cobrado: inserção do projeto → simulação → compilação (síntese/implementação) → download. Vantagem: menos espaço na placa e dá para mudar o projeto sem trocar o hardware.</p>
+        <h3>Instrumentos</h3>
+        ${table(["Instrumento","Para lembrar"], [
+          ["Osciloscópio","Gráfico tensão × tempo. Analógico desenha o sinal direto; digital amostra e reconstrói."],
+          ["V/div","Quantos volts cada quadradinho vertical vale."],
+          ["s/div","Quanto tempo cada quadradinho horizontal vale."],
+          ["Analisador lógico","Vários canais digitais (0/1) ao mesmo tempo; osciloscópio mostra a forma analógica do pulso."],
+          ["Gerador de funções","Produz ondas de teste (seno, quadrada, triangular)."],
+        ])}
+      `,
+      arduino: `
+        <h2>Arduino — o que a lista exige explicar</h2>
+        <p>Plataforma de prototipação: placa com microcontrolador AVR + IDE em C++. Hardware e software livres. Estrutura obrigatória: <code>setup()</code> roda uma vez; <code>loop()</code> repete para sempre.</p>
+        ${table(["Função","O que faz","Família"], [
+          ["pinMode(pino, modo)","Declara INPUT ou OUTPUT","Configuração"],
+          ["digitalWrite(pino, nível)","Escreve HIGH ou LOW","Escrita"],
+          ["digitalRead(pino)","Lê 0 ou 1 de um pino","Leitura"],
+          ["analogRead(pino)","Lê 0–1023 (ADC 10 bits)","Leitura"],
+          ["analogWrite(pino, 0–255)","PWM (brilho/velocidade)","Escrita"],
+          ["delay(ms)","Pausa em milissegundos","Tempo"],
+          ["Serial.begin(9600)","Abre a comunicação com o PC","Serial"],
+          ["Serial.print / println","Envia texto; println quebra linha","Serial"],
+        ])}
+        <div class="callout warn"><b>HIGH e LOW não são “ligado” mágicos</b>
+          HIGH ≈ 5 V (nível 1). LOW ≈ 0 V (nível 0). delay(1000) = 1 segundo. analogRead &gt; 500 é um limiar no meio da escala 0–1023 (cerca de 2,5 V).
+        </div>
+        <h3>Três programas da prova, em português</h3>
+        <div class="cards">
+          <div class="card"><h4>Blink (Q1)</h4><p>Pino 13 como OUTPUT. Liga, espera 1 s, desliga, espera 1 s. O LED pisca para sempre.</p></div>
+          <div class="card"><h4>Botão (Q2)</h4><p>Lê o botão. Se HIGH, LED acende; senão apaga. É um if/else direto, sem memória.</p></div>
+          <div class="card"><h4>Sensor (Q3 e Q4)</h4><p>analogRead no A0. Q3: &gt; 500 liga o LED. Q4: &lt; 300 baixo (LED off); &lt; 700 médio; senão alto (LED on).</p></div>
+        </div>
+        <h3>Tabela da questão 4 — complete de cabeça</h3>
+        ${table(["Valor","Mensagem","LED"], [
+          ["100","Nivel baixo","LOW"],
+          ["450","Nivel medio","HIGH"],
+          ["800","Nivel alto","HIGH"],
+          ["250","Nivel baixo","LOW"],
+          ["650","Nivel medio","HIGH"],
+          ["900","Nivel alto","HIGH"],
+        ])}
+      `,
+      treino: "",
+    };
+
+    function renderTreino() {
+      const [p, r] = QUESTOES[q];
+      return `
+        <h2>Treino rápido</h2>
+        <p class="muted">${q + 1} de ${QUESTOES.length} — tente responder em voz alta antes de revelar.</p>
+        <div class="card">
+          <h4>Pergunta</h4>
+          <p style="color:var(--text);font-weight:600;margin:8px 0 12px">${p}</p>
+          ${revelado ? `<div class="callout ok"><b>Resposta</b>${r}</div>` : ""}
+          <div class="btns">
+            <button class="primary" onclick="toggleResp()">${revelado ? "Esconder" : "Revelar resposta"}</button>
+            <button class="secondary" onclick="nextQ()">Próxima</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function show(id) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.id === id));
+      const box = document.getElementById("content");
+      box.innerHTML = id === "treino" ? renderTreino() : html[id];
+    }
+    function toggleResp() { revelado = !revelado; show("treino"); }
+    function nextQ() { q = (q + 1) % QUESTOES.length; revelado = false; show("treino"); }
+
+    const tabs = document.getElementById("tabs");
+    TOPICOS.forEach(([id, label], i) => {
+      const b = document.createElement("button");
+      b.className = "tab" + (i === 0 ? " on" : "");
+      b.dataset.id = id;
+      b.textContent = label;
+      b.onclick = () => show(id);
+      tabs.appendChild(b);
+    });
+    show("mapa");
+  </script>
+</body>
+</html>
