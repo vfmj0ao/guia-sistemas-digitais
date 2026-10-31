@@ -6,168 +6,107 @@
   <title>Guia de estudo — Introdução a Sistemas Digitais</title>
   <style>
     :root {
-      --bg: #111214;
-      --surface: #1a1b1e;
-      --elevated: #222326;
-      --text: #ececec;
-      --muted: #a0a0a0;
-      --faint: #7a7a7a;
-      --accent: #4d8dff;
-      --line: #2e2f33;
-      --warn: #c9a227;
-      --ok: #3d9a64;
-      --info: #3d7ad9;
+      --bg: #111214; --surface: #1a1b1e; --elevated: #222326;
+      --text: #ececec; --muted: #a0a0a0; --faint: #7a7a7a;
+      --accent: #4d8dff; --line: #2e2f33; --warn: #c9a227;
+      --ok: #3d9a64; --info: #3d7ad9;
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
     .wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
     h1 { font-size: 24px; font-weight: 650; margin: 0 0 8px; }
-    h2 { font-size: 18px; margin: 28px 0 10px; }
-    h3 { font-size: 15px; margin: 22px 0 8px; }
+    h2 { font-size: 18px; margin: 24px 0 10px; }
+    h3 { font-size: 15px; margin: 20px 0 8px; }
     p { margin: 0 0 12px; }
     .muted { color: var(--muted); }
     .small { color: var(--faint); font-size: 13px; }
-    .stats {
-      display: flex; gap: 28px; flex-wrap: wrap; margin: 20px 0 18px;
-    }
-    .stat strong { display: block; font-size: 20px; }
-    .stat span { font-size: 12px; color: var(--muted); }
-    .stat.warn strong { color: var(--warn); }
-    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 22px; }
+    .nav-main { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 10px; }
+    .nav-main .tab { font-size: 15px; padding: 8px 16px; font-weight: 600; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
     .tab {
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 13px;
+      border: 1px solid var(--line); background: transparent; color: var(--text);
+      border-radius: 999px; padding: 6px 12px; cursor: pointer; font-size: 13px;
     }
     .tab.on { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .panel { display: none; }
-    .panel.on { display: block; }
-    .callout {
-      border: 1px solid var(--line);
-      background: var(--surface);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin: 12px 0 18px;
-    }
+    .callout { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 12px 14px; margin: 12px 0 18px; }
     .callout.warn { border-left: 3px solid var(--warn); }
     .callout.info { border-left: 3px solid var(--info); }
     .callout.ok { border-left: 3px solid var(--ok); }
     .callout b { display: block; margin-bottom: 4px; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-      margin: 10px 0 18px;
-    }
-    th, td {
-      text-align: left;
-      padding: 8px 10px;
-      border-bottom: 1px solid var(--line);
-      vertical-align: top;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0 18px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
     th { color: var(--muted); font-weight: 600; font-size: 12px; }
     tr:nth-child(even) td { background: var(--surface); }
     .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px;
-    }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
     .card h4 { margin: 0 0 6px; font-size: 14px; }
     .card p { margin: 0; font-size: 13px; color: var(--muted); }
-    code {
-      font-family: Consolas, "Courier New", monospace;
-      background: var(--elevated);
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: 13px;
-    }
-    .bar {
-      display: flex; align-items: center; gap: 10px; margin: 6px 0;
-      font-size: 13px;
-    }
-    .bar span.label { width: 240px; flex-shrink: 0; color: var(--muted); }
-    .bar .track { flex: 1; height: 10px; background: var(--elevated); border-radius: 99px; overflow: hidden; }
-    .bar .fill { height: 100%; background: var(--accent); }
-    .bar span.n { width: 28px; text-align: right; }
+    code { font-family: Consolas, "Courier New", monospace; background: var(--elevated); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
     .btns { display: flex; gap: 8px; margin-top: 12px; }
-    button.primary, button.secondary {
-      border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 14px;
-    }
+    button.primary, button.secondary { border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 14px; }
     button.primary { background: var(--accent); color: #fff; }
     button.secondary { background: var(--elevated); color: var(--text); }
-    .share {
-      margin-top: 8px;
-      font-size: 13px;
-      color: var(--faint);
+    .conv { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 12px; }
+    .conv input, .conv select, .field input, .field select {
+      background: var(--elevated); color: var(--text); border: 1px solid var(--line);
+      border-radius: 8px; padding: 8px 10px; font-size: 16px; font-family: Consolas, monospace; min-width: 120px;
     }
-    @media (max-width: 700px) {
-      .cards { grid-template-columns: 1fr; }
-      .bar span.label { width: 140px; }
-      .stats { gap: 16px; }
-    }
+    .field { display: flex; flex-direction: column; gap: 4px; margin: 0 12px 12px 0; }
+    .field span { font-size: 12px; color: var(--muted); }
+    .grid-fields { display: flex; flex-wrap: wrap; align-items: end; }
+    .passos { font-family: Consolas, "Courier New", monospace; font-size: 14px; white-space: pre-wrap; }
+    .share { margin-top: 8px; font-size: 13px; color: var(--faint); }
+    @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
     @media print {
-      .tabs, .btns, .share { display: none !important; }
-      .panel { display: block !important; page-break-after: always; }
+      .nav-main, .tabs, .btns, .share { display: none !important; }
       body { background: #fff; color: #111; }
-      th, td, .card, .callout { border-color: #ccc; }
-      .card, .callout, tr:nth-child(even) td { background: #f6f6f6; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Guia de estudo — Introdução a Sistemas Digitais</h1>
-    <p class="muted">Compilado a partir das 3 listas e das aulas do prof. Murilo (UFMS/CPAN). Abre em qualquer navegador — celular incluso.</p>
-    <p class="share">Dica: no computador, use Ctrl+P → “Salvar como PDF” se quiser um arquivo para imprimir.</p>
-
-    <div class="stats">
-      <div class="stat"><strong>3 listas</strong><span>Floyd + Cap.1B + Arduino</span></div>
-      <div class="stat warn"><strong>Arduino</strong><span>Bloco mais cobrado</span></div>
-      <div class="stat"><strong>Analógico x digital</strong><span>Base de quase tudo</span></div>
-    </div>
-
-    <div class="tabs" id="tabs"></div>
+    <p class="muted">UFMS/CPAN · listas Floyd, Cap. 1B e Arduino. Três blocos: teoria, calculadora e questões resolvidas.</p>
+    <div class="nav-main" id="nav-main"></div>
+    <div class="tabs" id="subtabs"></div>
     <div id="content"></div>
   </div>
-
   <script>
-    const TOPICOS = [
-      ["mapa", "Mapa da prova"],
-      ["analogico", "Analógico x digital"],
-      ["binario", "Binário e pulsos"],
-      ["portas", "Portas lógicas"],
-      ["blocos", "Blocos digitais"],
-      ["cis", "CIs e PLDs"],
-      ["arduino", "Arduino"],
-      ["treino", "Treino rápido"],
+    const BLOCOS = [
+      ["conteudo", "Conteúdo"],
+      ["calc", "Calculadora"],
+      ["questoes", "Questões resolvidas"],
     ];
-
-    const QUESTOES = [
-      ["Uma rampa é analógica ou digital? E uma escada?", "Rampa = analógica (contínua). Escada = digital (degraus discretos)."],
-      ["Cite a principal limitação das técnicas digitais.", "O mundo real é analógico (e processar bits leva tempo)."],
-      ["Quais duas unidades formam a CPU?", "Unidade de controle + unidade lógica/aritmética (ULA)."],
-      ["Como se mede o tempo de subida de um pulso?", "Do ponto de 10% até o de 90% da amplitude."],
-      ["Se T = 4 ms, qual é a frequência?", "f = 1/T = 250 Hz."],
-      ["AND gera ALTO quando…? OR gera ALTO quando…?", "AND: todas as entradas ALTAS. OR: pelo menos uma ALTA."],
-      ["Qual acrônimo NÃO é lógica programável: PAL, GAL, ABEL, FPGA?", "ABEL — é linguagem de software. CUPL também."],
-      ["15.000 portas equivalentes: SSI, MSI, LSI, VLSI ou ULSI?", "VLSI (10.000 a 100.000)."],
-      ["Para que serve setup() e para que serve loop()?", "setup() configura uma vez. loop() repete o programa para sempre."],
-      ["analogRead(A0) retorna 700 com limiar 500. O LED liga?", "Sim. 700 > 500 → digitalWrite HIGH."],
-    ];
-
-    let q = 0, revelado = false;
+    const SUBS = {
+      conteudo: [
+        ["analogico", "Analógico x digital"],
+        ["computador", "Computador"],
+        ["pulsos", "Pulsos"],
+        ["portas", "Portas"],
+        ["blocos", "Blocos"],
+        ["cis", "CIs e PLDs"],
+        ["arduino", "Arduino"],
+      ],
+      calc: [
+        ["calc-bin", "Binário"],
+        ["calc-freq", "Frequência"],
+        ["calc-pulso", "Pulso"],
+        ["calc-serial", "Serial"],
+        ["calc-adc", "Arduino"],
+      ],
+      questoes: [
+        ["q3", "Floyd 3 · analógico/digital"],
+        ["q22", "Floyd 22 · HIGH/LOW"],
+        ["q23", "Floyd 23 · pulso"],
+        ["q24", "Floyd 24 · frequência"],
+        ["q25", "Floyd 25 · serial"],
+        ["q27", "1B 27 · SSI…ULSI"],
+        ["q38", "1B 38 · registrador"],
+        ["q40", "1B 40 · PLD"],
+        ["q41", "1B 41 · amplitude"],
+        ["aq4", "Arduino 4 · tabela"],
+      ],
+    };
 
     function table(headers, rows) {
       return `<table><thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${
@@ -175,96 +114,57 @@
       }</tbody></table>`;
     }
 
-    const html = {
-      mapa: `
-        <div class="callout warn"><b>O que priorizar hoje</b>
-          As listas batem em três eixos: (1) conversar sobre analógico vs digital sem errar as definições;
-          (2) medir pulsos (subida, descida, largura, frequência, ciclo de trabalho);
-          (3) ler e explicar código Arduino linha a linha. CIs, PLDs e instrumentos são memorização objetiva — caem, mas com menos peso.
-        </div>
-        <h2>Quantas perguntas caem em cada assunto</h2>
-        <p class="small">Contagem por item das listas Lista Cap 1 Floyd, Lista1B e Lista Arduino (subitens do Arduino contados à parte).</p>
-        ${[
-          ["Arduino (funções e código)", 30],
-          ["Analógico x digital", 13],
-          ["Formas de onda / pulso", 10],
-          ["Funções digitais (mux, memória…)", 10],
-          ["Binário e níveis lógicos", 7],
-          ["Lógica programável (PLD)", 6],
-          ["Organização do computador", 6],
-          ["Portas NOT / AND / OR", 5],
-          ["Instrumentos de teste", 5],
-          ["Circuitos integrados", 4],
-          ["Serial x paralelo", 3],
-        ].map(([l,n]) => `<div class="bar"><span class="label">${l}</span><div class="track"><div class="fill" style="width:${(n/30)*100}%"></div></div><span class="n">${n}</span></div>`).join("")}
-        <h2>Como a matéria se encaixa</h2>
-        <p>O mundo real é contínuo (analógico). O computador só entende dois estados (digital). Quase toda a disciplina é sobre essa ponte: como representar, processar, armazenar e medir uns e zeros — e, no Arduino, como ligar isso a um LED, um botão e um sensor.</p>
-        <div class="cards">
-          <div class="card"><h4>Cap. 1 Floyd</h4><p>Grandezas, vantagens/limites, 5 unidades do microcomputador, bits, pulsos, serial vs paralelo.</p></div>
-          <div class="card"><h4>Cap. 1B</h4><p>Portas lógicas, comparador, mux/demux, memória, CIs (SSI…ULSI), PLDs e osciloscópio.</p></div>
-          <div class="card"><h4>Aulas Arduino</h4><p>IDE, setup/loop, pinos digitais e analógicos, Serial, protoboard e componentes.</p></div>
-        </div>
-      `,
+    const paginas = {
       analogico: `
         <h2>Analógico x digital</h2>
-        <p>Analógico = valores contínuos, como uma rampa: você pode parar em qualquer altura. Digital = valores discretos, como uma escada: só existem degraus. Binário é o digital mais simples: só 0 e 1.</p>
-        ${table(["Exemplo da lista","Tipo","Por quê"], [
-          ["Subir por uma rampa","Analógico","Altura varia sem saltos"],
-          ["Subir por uma escada","Digital","Só existem degraus"],
-          ["Corrente num motor","Analógico","Varia de forma contínua"],
-          ["Altura marcada de 1 em 1 cm","Digital","Passos de 1 cm"],
-          ["Marca na parede (contínua)","Analógico","Qualquer posição"],
-          ["Volume de areia no balde","Digital","Grãos discretos"],
-          ["Volume de água no balde","Analógico","Líquido contínuo"],
+        <p>Analógico = contínuo (rampa). Digital = degraus. Binário = só 0 e 1 (bit).</p>
+        ${table(["Situação", "Tipo"], [
+          ["Rampa / água / marca na parede / corrente de motor", "Analógico"],
+          ["Escada / areia / fita de 1 cm", "Digital"],
         ])}
-        <h3>Vantagens digitais (decore estas 6)</h3>
-        <p>Projeto mais fácil (só HIGH/LOW) · armazenamento fácil · precisão se mantém · dá para programar · menos afetado por ruído · CIs com mais dispositivos internos.</p>
-        <div class="callout info"><b>A limitação que a prova cobra</b>
-          O mundo real é analógico. Por isso todo sistema “digital” (celular, CD, Arduino) precisa converter: microfone/sensor → analógico → ADC → bits → processamento → DAC ou PWM → de novo o mundo real. Processar bits também leva tempo.
-        </div>
-        <h3>Cinco unidades do microcomputador</h3>
-        ${table(["Unidade","Função em uma frase"], [
-          ["Entrada","Traz dados do mundo (teclado, sensor, botão)"],
-          ["Memória","Guarda programa e dados"],
-          ["Controle","Busca e interpreta instruções, manda nos outros"],
-          ["ULA (aritmética/lógica)","Contas e decisões"],
-          ["Saída","Mostra o resultado (tela, LED, som)"],
-        ])}
-        <p>CPU = Controle + ULA. Um CI que contém uma CPU chama-se microprocessador. Circuito com memória “lembra” o estado anterior; sem memória, a saída depende só das entradas atuais.</p>
+        <h3>Seis vantagens digitais</h3>
+        <p>Projeto mais fácil · armazenar é fácil · precisão se mantém · dá para programar · menos ruído · CIs mais densos.</p>
+        <p><b>Limitação:</b> o mundo real é analógico (e processar bits leva tempo). Celular, CD e Arduino são sistemas mistos: sensor/voz analógica → bits → de novo o mundo real.</p>
       `,
-      binario: `
-        <h2>Binário, níveis e pulsos</h2>
-        <p>Bit = binary digit = 0 ou 1. Em circuito: ALTO (HIGH) = 1, BAIXO (LOW) = 0. Não é um valor único de tensão — é uma faixa. Entre as faixas existe uma zona proibida (não pode haver sobreposição).</p>
-        <p>ALTO, ALTO, BAIXO, ALTO, BAIXO, BAIXO, BAIXO, ALTO vira <code>11010001</code>. BAIXO, BAIXO, BAIXO, ALTO, BAIXO, ALTO, BAIXO, ALTO, BAIXO vira <code>000101010</code>.</p>
-        <h3>Anatomia de um pulso</h3>
-        <svg viewBox="0 0 640 200" width="100%" height="180" role="img" aria-label="Pulso digital">
-          <rect width="640" height="200" fill="#1a1b1e"/>
-          <line x1="40" y1="40" x2="40" y2="170" stroke="#555"/>
-          <line x1="40" y1="150" x2="620" y2="150" stroke="#555"/>
-          <polyline fill="none" stroke="#4d8dff" stroke-width="2.5" points="40,150 120,150 170,50 380,50 430,150 620,150"/>
-          <text x="48" y="36" font-size="11" fill="#a0a0a0">ALTO (1)</text>
-          <text x="48" y="172" font-size="11" fill="#a0a0a0">BAIXO (0)</text>
-          <text x="130" y="110" font-size="11" fill="#7a7a7a">tr 10%→90%</text>
-          <text x="240" y="36" font-size="11" fill="#7a7a7a">tw (50% a 50%)</text>
-          <text x="390" y="110" font-size="11" fill="#7a7a7a">tf 90%→10%</text>
-        </svg>
-        <p class="small">Pulso típico da prova: subida (tr) de 10% a 90% da amplitude; descida (tf) de 90% a 10%; largura (tw) entre os pontos de 50%. Amplitude = topo − linha de base (ex.: 8 V − 1 V = 7 V).</p>
-        <div class="cards">
-          <div class="card"><h4>Fórmulas que caem</h4><p>Frequência <code>f = 1 / T</code><br>Período <code>T = 1 / f</code><br>Ciclo de trabalho <code>D = (tw / T) × 100%</code></p></div>
-          <div class="card"><h4>Serial x paralelo</h4><p>Serial: um bit por vez, menos fios, mais lento. Paralelo: todos os bits ao mesmo tempo, mais fios, mais rápido. Tempo total serial = 8 × tempo de um bit; paralelo = tempo de um bit.</p></div>
-        </div>
-        <p>Clock é uma onda periódica que marca o ritmo. Diagrama de temporização mostra várias linhas (clock, dados, sinais) alinhadas no tempo.</p>
+      computador: `
+        <h2>Organização do microcomputador</h2>
+        ${table(["Unidade", "Função"], [
+          ["Entrada", "Teclado, botão, sensor, microfone"],
+          ["Memória", "Guarda programa e dados"],
+          ["Controle", "Lê instruções e manda nos outros"],
+          ["ULA", "Contas e decisões"],
+          ["Saída", "Tela, LED, som"],
+        ])}
+        <p>CPU = Controle + ULA. CI com CPU = <b>microprocessador</b>. Com memória, a saída depende do passado; sem memória, só das entradas atuais.</p>
+      `,
+      pulsos: `
+        <h2>Bits, pulsos e fórmulas</h2>
+        <p>ALTO/HIGH = 1. BAIXO/LOW = 0. São faixas de tensão, sem sobreposição.</p>
+        <h3>O que cada letra significa</h3>
+        ${table(["Símbolo", "Nome", "Como achar no gráfico"], [
+          ["T", "Período", "De um início de ciclo até o próximo início (subida → subida)"],
+          ["f", "Frequência", "Quantos ciclos por segundo. f = 1/T"],
+          ["tw", "Largura", "Tempo em ALTO. No pulso não-ideal, meça em 50%"],
+          ["tr", "Subida", "De 10% até 90% da amplitude"],
+          ["tf", "Descida", "De 90% até 10% da amplitude"],
+          ["A", "Amplitude", "Topo − linha de base (a base pode não ser 0 V)"],
+          ["D", "Ciclo de trabalho", "Porcentagem do período em ALTO"],
+        ])}
+        ${table(["Fórmula", "Quando a questão pede"], [
+          ["f = 1 / T", "Frequência"],
+          ["T = 1 / f", "Período"],
+          ["D = (tw / T) × 100%", "Ciclo de trabalho / duty cycle"],
+          ["A = Vtopo − Vbase", "Amplitude"],
+          ["tserial = n × tbit", "Tempo da transferência serial"],
+          ["tparalelo = tbit", "Tempo da transferência paralela"],
+        ])}
+        <p>Unidade: se T está em ms, divida por 1000 para ter segundos antes de achar Hz. 4 ms → 0,004 s → 250 Hz.</p>
+        <p>A calculadora do site faz essas contas com os passos. Clock = metrônomo periódico. Diagrama de temporização = várias linhas alinhadas no tempo.</p>
       `,
       portas: `
-        <h2>Portas lógicas — as três operações</h2>
-        <p>Porta lógica = circuito que executa uma operação. Entradas à esquerda, saída à direita. AND e OR têm no mínimo duas entradas; NOT tem uma (e se chama inversor).</p>
-        ${table(["Porta","Saída ALTA quando…","Frase mental"], [
-          ["NOT (inversor)","A entrada é BAIXA","Inverte: 1 vira 0, 0 vira 1"],
-          ["AND","TODAS as entradas são ALTAS","E: só passa se todos concordam"],
-          ["OR","PELO MENOS UMA entrada é ALTA","OU: basta um sim"],
-        ])}
-        <h3>Tabela-verdade de 2 entradas</h3>
-        ${table(["A","B","NOT A","A AND B","A OR B"], [
+        <h2>Portas lógicas</h2>
+        <p>NOT (inversor): ALTA quando a entrada é BAIXA. AND: ALTA só se TODAS forem ALTAS. OR: ALTA se PELO MENOS UMA for ALTA.</p>
+        ${table(["A","B","NOT A","AND","OR"], [
           ["0","0","1","0","0"],
           ["0","1","1","0","1"],
           ["1","0","0","0","1"],
@@ -272,115 +172,576 @@
         ])}
       `,
       blocos: `
-        <h2>Blocos que montam um sistema digital</h2>
-        ${table(["Bloco","O que faz","Analogia"], [
-          ["Comparador","Diz se A = B, A > B ou A < B","Balança de dois pratos"],
-          ["Somador / ULA","Adição, subtração, multiplicação, divisão","Calculadora"],
-          ["Codificador","Decimal/tecla → código binário","Teclado: tecla 7 vira 0111"],
-          ["Decodificador","Código binário → forma humana","Display de 7 segmentos"],
-          ["Mux","Várias entradas → uma saída, no tempo","Régua de trilhos: escolhe um trem"],
-          ["Demux","Uma entrada → várias saídas","O contrário do mux"],
-          ["Flip-flop","Guarda 1 bit","Interruptor que trava"],
-          ["Registrador","Vários flip-flops = um grupo de bits","Fileira de interruptores"],
-          ["Contador","Conta pulsos; precisa lembrar o valor atual","Catraca"],
-          ["ROM / RAM / disco / fita","Quatro tipos clássicos de armazenamento","Permanente vs temporário"],
+        <h2>Blocos digitais</h2>
+        ${table(["Bloco", "O que faz"], [
+          ["Comparador", "A = B? A > B?"],
+          ["ULA / somador", "Quatro operações"],
+          ["Codificador", "Tecla → binário"],
+          ["Decodificador", "Binário → display"],
+          ["Mux", "Várias entradas, uma saída"],
+          ["Demux", "O contrário do mux"],
+          ["Flip-flop", "1 bit de memória"],
+          ["Registrador", "Vários flip-flops"],
+          ["Contador", "Conta pulsos (precisa lembrar)"],
+          ["ROM / RAM / disco / fita", "Quatro armazenamentos clássicos"],
         ])}
-        <div class="callout info"><b>Registrador serial da lista 1B</b>
-          8 bits zerados. Entram 0101 começando pelo 1, deslocando à direita (bit novo entra pela esquerda): 1 → 10000000; 0 → 01000000; 1 → 10100000; 0 → 01010000. Conteúdo final: <code>01010000</code>.
-        </div>
       `,
       cis: `
-        <h2>Circuitos integrados e lógica programável</h2>
-        <p>CI monolítico = circuito inteiro num chip de silício. DIP = pinos em duas fileiras, passam por furos (PTH). SMT = solda na superfície, economiza espaço; SOIC é um SMT com pinos em “asa de gaivota”.</p>
-        ${table(["Classe","Portas equivalentes","Exemplo da lista"], [
-          ["SSI","até 10","10 → SSI"],
-          ["MSI","10 a 100","75 → MSI"],
-          ["LSI","100 a 10.000","500 → LSI"],
-          ["VLSI","10.000 a 100.000","15.000 → VLSI"],
-          ["ULSI","mais de 100.000","200.000 → ULSI"],
+        <h2>CIs, PLDs e instrumentos</h2>
+        <p>DIP: pinos em duas fileiras, passam por furos. SMT/SOIC: solda na superfície, mais compacto.</p>
+        ${table(["Classe", "Portas", "Ex."], [
+          ["SSI","até 10","10"],
+          ["MSI","10 a 100","75"],
+          ["LSI","100 a 10.000","500"],
+          ["VLSI","10.000 a 100.000","15.000"],
+          ["ULSI","> 100.000","200.000"],
         ])}
-        <h3>PLDs — o que é hardware e o que é software</h3>
-        <p>Categorias principais: PLD e FPGA. PLD se divide em SPLD (simples: PAL programável uma vez, GAL reprogramável) e CPLD (vários SPLDs no mesmo chip). FPGA é mais densa. ABEL e CUPL são linguagens de software — não são lógica programável.</p>
-        <p>Fluxo cobrado: inserção do projeto → simulação → compilação (síntese/implementação) → download. Vantagem: menos espaço na placa e dá para mudar o projeto sem trocar o hardware.</p>
-        <h3>Instrumentos</h3>
-        ${table(["Instrumento","Para lembrar"], [
-          ["Osciloscópio","Gráfico tensão × tempo. Analógico desenha o sinal direto; digital amostra e reconstrói."],
-          ["V/div","Quantos volts cada quadradinho vertical vale."],
-          ["s/div","Quanto tempo cada quadradinho horizontal vale."],
-          ["Analisador lógico","Vários canais digitais (0/1) ao mesmo tempo; osciloscópio mostra a forma analógica do pulso."],
-          ["Gerador de funções","Produz ondas de teste (seno, quadrada, triangular)."],
-        ])}
+        <p>PLD e FPGA. SPLD = PAL (uma vez) / GAL (reprogramável). CPLD = vários SPLDs. <b>ABEL e CUPL são software</b>, não chip.</p>
+        <p>Fluxo: inserção → simulação → compilação → download.</p>
+        <p>Osciloscópio: tensão × tempo. V/div = volts por quadrado. s/div = tempo por quadrado. Analisador lógico: vários canais 0/1. Gerador de funções: fabrica ondas de teste.</p>
       `,
       arduino: `
-        <h2>Arduino — o que a lista exige explicar</h2>
-        <p>Plataforma de prototipação: placa com microcontrolador AVR + IDE em C++. Hardware e software livres. Estrutura obrigatória: <code>setup()</code> roda uma vez; <code>loop()</code> repete para sempre.</p>
-        ${table(["Função","O que faz","Família"], [
-          ["pinMode(pino, modo)","Declara INPUT ou OUTPUT","Configuração"],
-          ["digitalWrite(pino, nível)","Escreve HIGH ou LOW","Escrita"],
-          ["digitalRead(pino)","Lê 0 ou 1 de um pino","Leitura"],
-          ["analogRead(pino)","Lê 0–1023 (ADC 10 bits)","Leitura"],
-          ["analogWrite(pino, 0–255)","PWM (brilho/velocidade)","Escrita"],
-          ["delay(ms)","Pausa em milissegundos","Tempo"],
-          ["Serial.begin(9600)","Abre a comunicação com o PC","Serial"],
-          ["Serial.print / println","Envia texto; println quebra linha","Serial"],
-        ])}
-        <div class="callout warn"><b>HIGH e LOW não são “ligado” mágicos</b>
-          HIGH ≈ 5 V (nível 1). LOW ≈ 0 V (nível 0). delay(1000) = 1 segundo. analogRead &gt; 500 é um limiar no meio da escala 0–1023 (cerca de 2,5 V).
-        </div>
-        <h3>Três programas da prova, em português</h3>
-        <div class="cards">
-          <div class="card"><h4>Blink (Q1)</h4><p>Pino 13 como OUTPUT. Liga, espera 1 s, desliga, espera 1 s. O LED pisca para sempre.</p></div>
-          <div class="card"><h4>Botão (Q2)</h4><p>Lê o botão. Se HIGH, LED acende; senão apaga. É um if/else direto, sem memória.</p></div>
-          <div class="card"><h4>Sensor (Q3 e Q4)</h4><p>analogRead no A0. Q3: &gt; 500 liga o LED. Q4: &lt; 300 baixo (LED off); &lt; 700 médio; senão alto (LED on).</p></div>
-        </div>
-        <h3>Tabela da questão 4 — complete de cabeça</h3>
-        ${table(["Valor","Mensagem","LED"], [
-          ["100","Nivel baixo","LOW"],
-          ["450","Nivel medio","HIGH"],
-          ["800","Nivel alto","HIGH"],
-          ["250","Nivel baixo","LOW"],
-          ["650","Nivel medio","HIGH"],
-          ["900","Nivel alto","HIGH"],
+        <h2>Arduino</h2>
+        <p><code>setup()</code> uma vez. <code>loop()</code> para sempre. HIGH ≈ 5 V, LOW ≈ 0 V. <code>delay(1000)</code> = 1 s. <code>analogRead</code> = 0 a 1023.</p>
+        ${table(["Função", "Família"], [
+          ["pinMode", "Configuração"],
+          ["digitalWrite / analogWrite", "Escrita"],
+          ["digitalRead / analogRead", "Leitura"],
+          ["delay", "Tempo"],
+          ["Serial.begin / print / println", "Serial"],
         ])}
       `,
-      treino: "",
+      calc: `
+        <h2>Calculadora</h2>
+        <p>Use as abas acima.</p>
+      `,
+      "calc-bin": `
+        <h2>Binário ↔ decimal</h2>
+        <p>Aceita inteiro e fracionário. Vírgula ou ponto.</p>
+        <h3>Binário → decimal (pesos 2ⁿ)</h3>
+        <p>Esquerda da vírgula: expoente 0, 1, 2… Direita: −1, −2, −3… (0,5 · 0,25 · 0,125). Some só os 1. Ex.: <code>1101,101</code> = 13,625.</p>
+        <div class="conv">
+          <input id="in-bin" type="text" inputmode="decimal" placeholder="ex: 1101,101" onkeydown="if(event.key==='Enter')binParaDec()" />
+          <button class="primary" type="button" onclick="binParaDec()">Para decimal</button>
+        </div>
+        <div id="out-bin" class="callout ok" style="display:none"></div>
+        <h3>Decimal → binário (÷2 e ×2)</h3>
+        <p>Inteira: ÷2, restos de baixo para cima. Fração: ×2, pega o dígito antes da vírgula. Ex.: <code>6,75</code> = 110,11.</p>
+        <div class="conv">
+          <input id="in-dec" type="text" inputmode="decimal" placeholder="ex: 13,625" onkeydown="if(event.key==='Enter')decParaBin()" />
+          <button class="primary" type="button" onclick="decParaBin()">Para binário</button>
+        </div>
+        <div id="out-dec" class="callout ok" style="display:none"></div>
+        <div class="callout warn"><b>Dízima</b>0,1₁₀ não fecha em binário. Na prova, vá até o número de bits pedido.</div>
+      `,
+      "calc-freq": `
+        <h2>Frequência, período e ciclo de trabalho</h2>
+        <p><code>f = 1/T</code> · <code>D = (tw / T) × 100%</code>. T é o ciclo inteiro (ALTO + BAIXO), não só o tempo em 1.</p>
+        <h3>Onda da prova (ALTO e BAIXO)</h3>
+        <p class="muted">Floyd 24: ALTO = 2, BAIXO = 2, unidade ms → 250 Hz e 50%.</p>
+        <div class="grid-fields">
+          <label class="field"><span>Tempo em ALTO (tw)</span><input id="alto" type="text" value="2" /></label>
+          <label class="field"><span>Tempo em BAIXO</span><input id="baixo" type="text" value="2" /></label>
+          <label class="field"><span>Unidade</span>
+            <select id="u-onda"><option value="s">s</option><option value="ms" selected>ms</option><option value="us">µs</option></select>
+          </label>
+          <button class="primary" type="button" onclick="calcOnda()">Calcular</button>
+        </div>
+        <div id="out-onda" class="callout ok" style="display:none"></div>
+        <h3>Só período ↔ frequência</h3>
+        <div class="grid-fields">
+          <label class="field"><span>Período T</span><input id="in-T" type="text" placeholder="4" /></label>
+          <label class="field"><span>Unidade de T</span>
+            <select id="u-T"><option value="s">s</option><option value="ms" selected>ms</option><option value="us">µs</option></select>
+          </label>
+          <button class="primary" type="button" onclick="calcFT()">T → f</button>
+        </div>
+        <div class="grid-fields">
+          <label class="field"><span>Frequência f (Hz)</span><input id="in-f" type="text" placeholder="250" /></label>
+          <button class="primary" type="button" onclick="calcTF()">f → T</button>
+        </div>
+        <div id="out-ft" class="callout ok" style="display:none"></div>
+      `,
+      "calc-pulso": `
+        <h2>Pulso: amplitude, 10%, 50%, 90%</h2>
+        <p>Primeiro a altura. Depois as porcentagens viram as linhas que você busca no gráfico.</p>
+        <div class="grid-fields">
+          <label class="field"><span>Linha de base (V)</span><input id="vbase" type="text" value="0" /></label>
+          <label class="field"><span>Topo (V)</span><input id="vtopo" type="text" value="10" /></label>
+          <button class="primary" type="button" onclick="calcAmp()">Calcular níveis</button>
+        </div>
+        <div id="out-amp" class="callout ok" style="display:none"></div>
+        <h3>Tempos no gráfico (opcional)</h3>
+        <p class="muted">Coloque os instantes em que o pulso cruza cada nível. Mesma unidade nos seis campos (ex.: µs).</p>
+        <div class="grid-fields">
+          <label class="field"><span>t no 10% da subida</span><input id="t10s" type="text" placeholder="0,2" /></label>
+          <label class="field"><span>t no 90% da subida</span><input id="t90s" type="text" placeholder="0,8" /></label>
+          <label class="field"><span>t no 50% da subida</span><input id="t50s" type="text" placeholder="0,5" /></label>
+          <label class="field"><span>t no 50% da descida</span><input id="t50d" type="text" placeholder="3,2" /></label>
+          <label class="field"><span>t no 90% da descida</span><input id="t90d" type="text" placeholder="2,9" /></label>
+          <label class="field"><span>t no 10% da descida</span><input id="t10d" type="text" placeholder="3,5" /></label>
+          <button class="primary" type="button" onclick="calcTemposPulso()">Calcular tr, tf, tw</button>
+        </div>
+        <div id="out-tr" class="callout ok" style="display:none"></div>
+      `,
+      "calc-serial": `
+        <h2>Transferência serial e paralela</h2>
+        <p><code>tserial = n × tbit</code> · <code>tparalelo = tbit</code>. Floyd 25: 8 bits × 1 µs → 8 µs e 1 µs.</p>
+        <div class="grid-fields">
+          <label class="field"><span>Número de bits (n)</span><input id="nbits" type="text" value="8" /></label>
+          <label class="field"><span>Tempo de 1 bit</span><input id="tbit" type="text" value="1" /></label>
+          <label class="field"><span>Unidade</span>
+            <select id="u-bit"><option value="s">s</option><option value="ms">ms</option><option value="us" selected>µs</option></select>
+          </label>
+          <button class="primary" type="button" onclick="calcSerial()">Calcular</button>
+        </div>
+        <div id="out-serial" class="callout ok" style="display:none"></div>
+      `,
+      "calc-adc": `
+        <h2>Arduino: analogRead e delay</h2>
+        <p>ADC de 10 bits: 0 a 1023 para 0 a 5 V. <code>V = (leitura / 1023) × 5</code>. delay é em milissegundos.</p>
+        <div class="grid-fields">
+          <label class="field"><span>analogRead (0–1023)</span><input id="adc" type="text" placeholder="512" /></label>
+          <button class="primary" type="button" onclick="calcAdc()">Leitura → volts</button>
+        </div>
+        <div class="grid-fields">
+          <label class="field"><span>Tensão (V)</span><input id="volts" type="text" placeholder="2,5" /></label>
+          <button class="primary" type="button" onclick="calcVoltAdc()">Volts → leitura</button>
+        </div>
+        <div id="out-adc" class="callout ok" style="display:none"></div>
+        <div class="grid-fields">
+          <label class="field"><span>delay(ms)</span><input id="dly" type="text" placeholder="1000" /></label>
+          <button class="primary" type="button" onclick="calcDelay()">Converter</button>
+        </div>
+        <div id="out-dly" class="callout ok" style="display:none"></div>
+      `,
+      q3: `
+        <h2>Floyd 3 — analógico ou digital?</h2>
+        <p>Regra: dá para variar sem saltos = analógico. Só existem degraus = digital.</p>
+        ${table(["Item", "Tipo", "Por quê"], [
+          ["(a) Escada", "Digital", "Só degraus"],
+          ["(b) Rampa", "Analógico", "Qualquer altura"],
+          ["(c) Corrente no motor", "Analógico", "Contínua"],
+          ["(d) Altura de 1 em 1 cm", "Digital", "Passos de 1 cm"],
+          ["(e) Marca na parede", "Analógico", "Qualquer posição"],
+          ["(f) Areia no balde", "Digital", "Grãos discretos"],
+          ["(g) Água no balde", "Analógico", "Líquido contínuo"],
+        ])}
+        <div class="callout warn"><b>Pegadinha</b>Areia parece “contínua”, mas o livro trata grãos como discretos. Água, não.</div>
+      `,
+      q22: `
+        <h2>Floyd 22 — HIGH/LOW vira bits</h2>
+        <p>ALTO = 1. BAIXO = 0. Copie na ordem.</p>
+        ${table(["Sequência", "Bits"], [
+          ["ALTO, ALTO, BAIXO, ALTO, BAIXO, BAIXO, BAIXO, ALTO", "<code>11010001</code>"],
+          ["BAIXO, BAIXO, BAIXO, ALTO, BAIXO, ALTO, BAIXO, ALTO, BAIXO", "<code>000101010</code>"],
+        ])}
+      `,
+      q23: `
+        <h2>Floyd 23 — medir o pulso</h2>
+        <p>Figura da página 2: Volts 0–10, tempo 0–4 µs. Pulso de 0 V a 10 V.</p>
+        <svg viewBox="0 0 520 240" width="100%" height="210" role="img" aria-label="Pulso da questão 23">
+          <rect width="520" height="240" fill="#1a1b1e"/>
+          <text x="18" y="22" font-size="11" fill="#a0a0a0">Volts</text>
+          <text x="455" y="228" font-size="11" fill="#a0a0a0">t (µs)</text>
+          <line x1="50" y1="20" x2="50" y2="200" stroke="#555"/>
+          <line x1="50" y1="200" x2="490" y2="200" stroke="#555"/>
+          <text x="16" y="44" font-size="10" fill="#7a7a7a">10</text>
+          <text x="22" y="118" font-size="10" fill="#7a7a7a">5</text>
+          <text x="28" y="204" font-size="10" fill="#7a7a7a">0</text>
+          <text x="48" y="218" font-size="10" fill="#7a7a7a">0</text>
+          <text x="152" y="218" font-size="10" fill="#7a7a7a">1</text>
+          <text x="256" y="218" font-size="10" fill="#7a7a7a">2</text>
+          <text x="360" y="218" font-size="10" fill="#7a7a7a">3</text>
+          <text x="464" y="218" font-size="10" fill="#7a7a7a">4</text>
+          <line x1="50" y1="40" x2="490" y2="40" stroke="#2e2f33"/>
+          <line x1="50" y1="120" x2="490" y2="120" stroke="#2e2f33"/>
+          <polyline fill="none" stroke="#4d8dff" stroke-width="2.5" points="50,200 70,200 92,184 114,120 145,56 165,40 330,40 346,56 376,120 404,184 425,200 490,200"/>
+          <circle cx="92" cy="184" r="3.5" fill="#c9a227"/>
+          <circle cx="145" cy="56" r="3.5" fill="#c9a227"/>
+          <circle cx="114" cy="120" r="3.5" fill="#3d9a64"/>
+          <circle cx="376" cy="120" r="3.5" fill="#3d9a64"/>
+        </svg>
+        <p>Régua: amplitude 10 V → 10% = 1 V, 50% = 5 V, 90% = 9 V.</p>
+        ${table(["Item", "Como medir", "Valor"], [
+          ["(a) subida tr", "10% → 90% (1 V em 0,2 µs até 9 V em 0,8 µs)", "0,6 µs"],
+          ["(b) descida tf", "90% → 10% (2,9 µs até 3,5 µs)", "0,6 µs"],
+          ["(c) largura tw", "50% → 50% (0,5 µs até 3,2 µs)", "2,7 µs"],
+          ["(d) amplitude", "topo − base", "10 V"],
+        ])}
+        <div class="callout warn"><b>Erro clássico</b>Não meça de 0 V a 10 V. Tolerância de 0,1 µs no papel.</div>
+      `,
+      q24: `
+        <h2>Floyd 24 — frequência e ciclo de trabalho</h2>
+        <p>Onda periódica. Eixo em <b>ms</b>. ALTO 2 ms, BAIXO 2 ms, e isso se repete.</p>
+        <svg viewBox="0 0 640 150" width="100%" height="150" role="img" aria-label="Onda quadrada da questão 24">
+          <rect width="640" height="150" fill="#1a1b1e"/>
+          <text x="12" y="22" font-size="11" fill="#a0a0a0">V</text>
+          <text x="575" y="138" font-size="11" fill="#a0a0a0">t (ms)</text>
+          <line x1="40" y1="20" x2="40" y2="110" stroke="#555"/>
+          <line x1="40" y1="110" x2="620" y2="110" stroke="#555"/>
+          <polyline fill="none" stroke="#4d8dff" stroke-width="2.5"
+            points="40,40 100,40 100,110 160,110 160,40 220,40 220,110 280,110 280,40 340,40 340,110 400,110 400,40 460,40 460,110 520,110 520,40 580,40 580,110 620,110"/>
+          <text x="95" y="128" font-size="10" fill="#7a7a7a">2</text>
+          <text x="155" y="128" font-size="10" fill="#7a7a7a">4</text>
+          <text x="215" y="128" font-size="10" fill="#7a7a7a">6</text>
+          <text x="275" y="128" font-size="10" fill="#7a7a7a">8</text>
+        </svg>
+        <p>(a) Período T = 4 ms = 0,004 s. Frequência f = 1/T = <code>250 Hz</code>.</p>
+        <p>(b) Largura do pulso ALTO tw = 2 ms. Ciclo de trabalho D = (2 / 4) × 100% = <code>50%</code>.</p>
+        <div class="callout info"><b>Fórmulas</b><code>f = 1/T</code> · <code>D = (tw / T) × 100%</code>. T é de um início de ciclo até o próximo início, não a largura do ALTO.</div>
+      `,
+      q25: `
+        <h2>Floyd 25 — serial vs paralelo</h2>
+        <p>Oito bits, um por microsegundo. Sequência lida no gráfico: <code>10101110</code>.</p>
+        <svg viewBox="0 0 560 140" width="100%" height="140" role="img" aria-label="Oito bits em série">
+          <rect width="560" height="140" fill="#1a1b1e"/>
+          <text x="500" y="128" font-size="11" fill="#a0a0a0">t (µs)</text>
+          <line x1="40" y1="20" x2="40" y2="100" stroke="#555"/>
+          <line x1="40" y1="100" x2="520" y2="100" stroke="#555"/>
+          <polyline fill="none" stroke="#4d8dff" stroke-width="2.5"
+            points="40,36 100,36 100,100 160,100 160,36 220,36 220,100 280,100 280,36 460,36 460,100 520,100"/>
+          <text x="64" y="24" font-size="11" fill="#a0a0a0">1</text>
+          <text x="124" y="24" font-size="11" fill="#a0a0a0">0</text>
+          <text x="184" y="24" font-size="11" fill="#a0a0a0">1</text>
+          <text x="244" y="24" font-size="11" fill="#a0a0a0">0</text>
+          <text x="304" y="24" font-size="11" fill="#a0a0a0">1</text>
+          <text x="364" y="24" font-size="11" fill="#a0a0a0">1</text>
+          <text x="424" y="24" font-size="11" fill="#a0a0a0">1</text>
+          <text x="484" y="24" font-size="11" fill="#a0a0a0">0</text>
+          <text x="36" y="118" font-size="10" fill="#7a7a7a">0</text>
+          <text x="504" y="118" font-size="10" fill="#7a7a7a">8</text>
+        </svg>
+        <p>Cada bit dura <b>1 µs</b>.</p>
+        <p>Serial: os 8 bits vão um atrás do outro → 8 × 1 µs = <code>8 µs</code>.</p>
+        <p>Paralelo: os 8 bits saem juntos, no tempo de um único bit → <code>1 µs</code>.</p>
+      `,
+      q27: `
+        <h2>Lista 1B 27 — classificar o CI</h2>
+        ${table(["Portas equivalentes", "Classe"], [
+          ["(a) 10", "SSI (até 10)"],
+          ["(b) 75", "MSI (10 a 100)"],
+          ["(c) 500", "LSI (100 a 10.000)"],
+          ["(d) 15.000", "VLSI (10.000 a 100.000)"],
+          ["(e) 200.000", "ULSI (mais de 100.000)"],
+        ])}
+        <p>10 está no teto do SSI — a lista trata como SSI.</p>
+      `,
+      q38: `
+        <h2>Lista 1B 38 — registrador serial</h2>
+        <p>8 bits zerados. Entram <code>0101</code> começando pelo 1, deslocando à direita (bit novo entra pela esquerda).</p>
+        ${table(["Passo", "Entra", "Registrador"], [
+          ["início", "—", "00000000"],
+          ["1", "1", "10000000"],
+          ["2", "0", "01000000"],
+          ["3", "1", "10100000"],
+          ["4", "0", "01010000"],
+        ])}
+        <p>Conteúdo final: <code>01010000</code>.</p>
+      `,
+      q40: `
+        <h2>Lista 1B 40 — qual NÃO é lógica programável?</h2>
+        <p>Lista: PAL, GAL, SPLD, ABEL, CPLD, CUPL, FPGA.</p>
+        <p>Hardware: PAL, GAL, SPLD, CPLD, FPGA.</p>
+        <p>Software (linguagens): <b>ABEL</b> e <b>CUPL</b>.</p>
+        <p>Resposta: os que não descrevem lógica programável são <code>ABEL</code> e <code>CUPL</code> — se a prova pedir um, comece por ABEL.</p>
+      `,
+      q41: `
+        <h2>Lista 1B 41 — amplitude no osciloscópio</h2>
+        <p>Linha de base = 1 V. Topo = 8 V.</p>
+        <p>Amplitude = topo − base = 8 − 1 = <code>7 V</code>.</p>
+        <p>Não é 8 V: a base já estava em 1 V.</p>
+      `,
+      aq4: `
+        <h2>Arduino 4 — complete a tabela</h2>
+        <p>Código: se valor &lt; 300 → baixo e LED LOW; senão se &lt; 700 → médio e LED HIGH; senão → alto e LED HIGH.</p>
+        ${table(["Sensor", "Mensagem", "LED", "Por quê"], [
+          ["100", "Nivel baixo", "LOW", "100 &lt; 300"],
+          ["250", "Nivel baixo", "LOW", "250 &lt; 300"],
+          ["450", "Nivel medio", "HIGH", "≥ 300 e &lt; 700"],
+          ["650", "Nivel medio", "HIGH", "≥ 300 e &lt; 700"],
+          ["800", "Nivel alto", "HIGH", "≥ 700"],
+          ["900", "Nivel alto", "HIGH", "≥ 700"],
+        ])}
+        <div class="callout warn"><b>Fronteiras</b>300 não é médio: &lt; 300 é baixo. 700 não é médio: cai no else (alto).</div>
+        <h3>Arduino 3, de passagem</h3>
+        <p><code>analogRead &gt; 500</code>: 700 liga o LED; 300 apaga. 500 é o limiar no meio da escala 0–1023.</p>
+      `,
     };
 
-    function renderTreino() {
-      const [p, r] = QUESTOES[q];
-      return `
-        <h2>Treino rápido</h2>
-        <p class="muted">${q + 1} de ${QUESTOES.length} — tente responder em voz alta antes de revelar.</p>
-        <div class="card">
-          <h4>Pergunta</h4>
-          <p style="color:var(--text);font-weight:600;margin:8px 0 12px">${p}</p>
-          ${revelado ? `<div class="callout ok"><b>Resposta</b>${r}</div>` : ""}
-          <div class="btns">
-            <button class="primary" onclick="toggleResp()">${revelado ? "Esconder" : "Revelar resposta"}</button>
-            <button class="secondary" onclick="nextQ()">Próxima</button>
-          </div>
-        </div>
-      `;
+    let bloco = "conteudo";
+    let sub = "analogico";
+
+    function ir(b, s) {
+      bloco = b;
+      const lista = SUBS[b];
+      sub = s || (lista[0] ? lista[0][0] : b);
+      render();
+    }
+    function paginaAtual() {
+      return sub;
+    }
+    function render() {
+      const nav = document.getElementById("nav-main");
+      nav.innerHTML = "";
+      BLOCOS.forEach(([id, label]) => {
+        const b = document.createElement("button");
+        b.className = "tab" + (bloco === id ? " on" : "");
+        b.textContent = label;
+        b.onclick = () => ir(id);
+        nav.appendChild(b);
+      });
+      const subEl = document.getElementById("subtabs");
+      subEl.innerHTML = "";
+      (SUBS[bloco] || []).forEach(([id, label]) => {
+        const b = document.createElement("button");
+        b.className = "tab" + (sub === id ? " on" : "");
+        b.textContent = label;
+        b.onclick = () => ir(bloco, id);
+        subEl.appendChild(b);
+      });
+      const id = paginaAtual();
+      document.getElementById("content").innerHTML = paginas[id] || "";
+      history.replaceState(null, "", "#" + id);
     }
 
-    function show(id) {
-      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.id === id));
-      const box = document.getElementById("content");
-      box.innerHTML = id === "treino" ? renderTreino() : html[id];
+    function fmtDec(n) {
+      if (Number.isInteger(n)) return String(n);
+      return String(n).replace(".", ",");
     }
-    function toggleResp() { revelado = !revelado; show("treino"); }
-    function nextQ() { q = (q + 1) % QUESTOES.length; revelado = false; show("treino"); }
+    function pesoTexto(p) {
+      if (p >= 1) return String(p);
+      const den = Math.round(1 / p);
+      if (Math.abs(1 / den - p) < 1e-12) return "1/" + den;
+      return fmtDec(p);
+    }
+    function binParaDec() {
+      const raw = (document.getElementById("in-bin")?.value || "").trim();
+      const box = document.getElementById("out-bin");
+      if (!box) return;
+      const bits = raw.replace(/\s/g, "").replace(",", ".");
+      if (!/^[01]+(\.[01]+)?$/.test(bits)) {
+        box.style.display = "block";
+        box.innerHTML = "<b>Use 0, 1 e no máximo uma vírgula</b>Exemplos: 1101 &nbsp; 1101,101 &nbsp; 0,11";
+        return;
+      }
+      const [intBits, fracBits = ""] = bits.split(".");
+      const intPesos = [...intBits].map((_, i) => 2 ** (intBits.length - 1 - i));
+      const fracPesos = [...fracBits].map((_, i) => 2 ** -(i + 1));
+      let total = 0;
+      const intPartes = [...intBits].map((b, i) => {
+        const v = b === "1" ? intPesos[i] : 0;
+        total += v;
+        return b === "1" ? String(intPesos[i]) : "0";
+      });
+      const fracPartes = [...fracBits].map((b, i) => {
+        const v = b === "1" ? fracPesos[i] : 0;
+        total += v;
+        return b === "1" ? pesoTexto(fracPesos[i]) : "0";
+      });
+      const mostrado = bits.replace(".", ",");
+      let passos = "parte inteira\n  pesos: " + intPesos.join("  ") + "\n  soma:  " + (intPartes.join(" + ") || "0");
+      if (fracBits) {
+        passos += "\nparte fracionária\n  pesos: " + fracPesos.map(pesoTexto).join("  ") +
+          "\n  soma:  " + fracPartes.join(" + ");
+      }
+      passos += "\ntotal = " + fmtDec(total);
+      box.style.display = "block";
+      box.innerHTML = "<b>" + mostrado + "<sub>2</sub> = " + fmtDec(total) + "<sub>10</sub></b><div class='passos'>" + passos + "</div>";
+    }
+    function decParaBin() {
+      const raw = (document.getElementById("in-dec")?.value || "").trim();
+      const box = document.getElementById("out-dec");
+      if (!box) return;
+      const s = raw.replace(/\s/g, "").replace(",", ".");
+      if (!/^\d+(\.\d+)?$/.test(s)) {
+        box.style.display = "block";
+        box.innerHTML = "<b>Digite um decimal ≥ 0</b>Exemplos: 13 &nbsp; 13,625 &nbsp; 0,75";
+        return;
+      }
+      const n = Number(s);
+      const intPart = Math.floor(n + 1e-12);
+      let frac = n - intPart;
+      if (frac < 0) frac = 0;
+      const linhasInt = [];
+      const restos = [];
+      let x = intPart;
+      if (x === 0) restos.push(0);
+      while (x > 0) {
+        linhasInt.push(x + " ÷ 2 = " + Math.floor(x / 2) + "  resto " + (x % 2));
+        restos.push(x % 2);
+        x = Math.floor(x / 2);
+      }
+      const binInt = restos.reverse().join("");
+      const maxFrac = 16;
+      const bitsFrac = [];
+      const linhasFrac = [];
+      let f = frac;
+      let i = 0;
+      while (f > 1e-12 && i < maxFrac) {
+        const prod = f * 2;
+        const bit = prod >= 1 ? 1 : 0;
+        linhasFrac.push(fmtDec(Number(f.toFixed(10))) + " × 2 = " + fmtDec(Number(prod.toFixed(10))) + "  → bit " + bit);
+        bitsFrac.push(bit);
+        f = prod - bit;
+        i++;
+      }
+      const binFrac = bitsFrac.join("");
+      const bin = binFrac ? binInt + "," + binFrac : binInt;
+      const mostrado = s.replace(".", ",");
+      let passos = "parte inteira (restos de baixo para cima)\n" + (linhasInt.join("\n") || "0 → 0");
+      if (frac > 1e-12) {
+        passos += "\nparte fracionária (×2, pegar o dígito antes da vírgula)\n" + linhasFrac.join("\n");
+        if (f > 1e-12) passos += "\n(não zerou: dízima; aqui foram " + maxFrac + " bits)";
+      }
+      passos += "\nresultado: " + bin;
+      box.style.display = "block";
+      box.innerHTML = "<b>" + mostrado + "<sub>10</sub> = " + bin + "<sub>2</sub></b><div class='passos'>" + passos + "</div>";
+    }
 
-    const tabs = document.getElementById("tabs");
-    TOPICOS.forEach(([id, label], i) => {
-      const b = document.createElement("button");
-      b.className = "tab" + (i === 0 ? " on" : "");
-      b.dataset.id = id;
-      b.textContent = label;
-      b.onclick = () => show(id);
-      tabs.appendChild(b);
-    });
-    show("mapa");
+    function num(id) {
+      const s = (document.getElementById(id)?.value || "").trim().replace(",", ".");
+      if (!s) return NaN;
+      const n = Number(s);
+      return Number.isFinite(n) ? n : NaN;
+    }
+    function toSec(v, u) {
+      if (u === "ms") return v / 1e3;
+      if (u === "us") return v / 1e6;
+      return v;
+    }
+    function fmtHz(f) {
+      if (f >= 1e6) return fmtDec(Number((f / 1e6).toPrecision(8))) + " MHz";
+      if (f >= 1e3) return fmtDec(Number((f / 1e3).toPrecision(8))) + " kHz";
+      return fmtDec(Number(f.toPrecision(8))) + " Hz";
+    }
+    function fmtTime(s) {
+      const x = Math.abs(s);
+      if (x >= 1) return fmtDec(Number(s.toPrecision(8))) + " s";
+      if (x >= 1e-3) return fmtDec(Number((s * 1e3).toPrecision(8))) + " ms";
+      return fmtDec(Number((s * 1e6).toPrecision(8))) + " µs";
+    }
+    function showBox(id, html) {
+      const box = document.getElementById(id);
+      if (!box) return;
+      box.style.display = "block";
+      box.innerHTML = html;
+    }
+    function calcOnda() {
+      const alto = num("alto");
+      const baixo = num("baixo");
+      const u = document.getElementById("u-onda")?.value || "ms";
+      if (!(alto > 0) || !(baixo >= 0)) {
+        showBox("out-onda", "<b>Preencha ALTO e BAIXO</b>Use números positivos. Ex.: 2 e 2 em ms.");
+        return;
+      }
+      const T = alto + baixo;
+      const Ts = toSec(T, u);
+      const f = 1 / Ts;
+      const D = (alto / T) * 100;
+      showBox("out-onda",
+        "<b>T = " + fmtDec(T) + " " + u + " · f = " + fmtHz(f) + " · D = " + fmtDec(Number(D.toPrecision(6))) + "%</b>" +
+        "<div class='passos'>T = ALTO + BAIXO = " + fmtDec(alto) + " + " + fmtDec(baixo) + " = " + fmtDec(T) + " " + u +
+        "\nT em segundos = " + fmtDec(Number(Ts.toPrecision(8))) + " s" +
+        "\nf = 1 / T = " + fmtHz(f) +
+        "\nD = (tw / T) × 100% = (" + fmtDec(alto) + " / " + fmtDec(T) + ") × 100% = " + fmtDec(Number(D.toPrecision(6))) + "%</div>");
+    }
+    function calcFT() {
+      const T = num("in-T");
+      const u = document.getElementById("u-T")?.value || "ms";
+      if (!(T > 0)) { showBox("out-ft", "<b>Digite um período T &gt; 0</b>"); return; }
+      const f = 1 / toSec(T, u);
+      showBox("out-ft", "<b>f = " + fmtHz(f) + "</b><div class='passos'>T = " + fmtDec(T) + " " + u + " = " + fmtTime(toSec(T, u)) + "\nf = 1/T = " + fmtHz(f) + "</div>");
+    }
+    function calcTF() {
+      const f = num("in-f");
+      if (!(f > 0)) { showBox("out-ft", "<b>Digite f em Hz, maior que 0</b>"); return; }
+      const T = 1 / f;
+      showBox("out-ft", "<b>T = " + fmtTime(T) + "</b><div class='passos'>T = 1/f = 1/" + fmtDec(f) + " = " + fmtTime(T) + "</div>");
+    }
+    function calcAmp() {
+      const base = num("vbase");
+      const topo = num("vtopo");
+      if (!Number.isFinite(base) || !Number.isFinite(topo)) {
+        showBox("out-amp", "<b>Preencha base e topo</b>");
+        return;
+      }
+      const A = topo - base;
+      if (A <= 0) { showBox("out-amp", "<b>O topo precisa ser maior que a base</b>"); return; }
+      const p10 = base + 0.1 * A;
+      const p50 = base + 0.5 * A;
+      const p90 = base + 0.9 * A;
+      showBox("out-amp",
+        "<b>Amplitude A = " + fmtDec(A) + " V</b>" +
+        "<div class='passos'>A = topo − base = " + fmtDec(topo) + " − " + fmtDec(base) + " = " + fmtDec(A) + " V" +
+        "\n10% = base + 0,1×A = " + fmtDec(p10) + " V" +
+        "\n50% = base + 0,5×A = " + fmtDec(p50) + " V" +
+        "\n90% = base + 0,9×A = " + fmtDec(p90) + " V" +
+        "\nNo gráfico: tr de " + fmtDec(p10) + " V até " + fmtDec(p90) + " V; tw em " + fmtDec(p50) + " V</div>");
+    }
+    function calcTemposPulso() {
+      const t10s = num("t10s"), t90s = num("t90s"), t50s = num("t50s");
+      const t50d = num("t50d"), t90d = num("t90d"), t10d = num("t10d");
+      const linhas = [];
+      if (Number.isFinite(t10s) && Number.isFinite(t90s)) {
+        linhas.push("tr = t90% − t10% (subida) = " + fmtDec(t90s) + " − " + fmtDec(t10s) + " = " + fmtDec(t90s - t10s));
+      }
+      if (Number.isFinite(t90d) && Number.isFinite(t10d)) {
+        linhas.push("tf = t10% − t90% (descida) = " + fmtDec(t10d) + " − " + fmtDec(t90d) + " = " + fmtDec(t10d - t90d));
+      }
+      if (Number.isFinite(t50s) && Number.isFinite(t50d)) {
+        linhas.push("tw = t50% descida − t50% subida = " + fmtDec(t50d) + " − " + fmtDec(t50s) + " = " + fmtDec(t50d - t50s));
+      }
+      if (!linhas.length) {
+        showBox("out-tr", "<b>Preencha pelo menos um par</b>10% e 90% da subida; 90% e 10% da descida; ou os dois 50%.");
+        return;
+      }
+      showBox("out-tr", "<b>Tempos do pulso</b><div class='passos'>" + linhas.join("\n") + "\n(mesma unidade que você digitou)</div>");
+    }
+    function calcSerial() {
+      const n = num("nbits");
+      const tb = num("tbit");
+      const u = document.getElementById("u-bit")?.value || "us";
+      const nome = u === "us" ? "µs" : u;
+      if (!(n > 0) || !(tb > 0)) { showBox("out-serial", "<b>Preencha n e o tempo de 1 bit</b>"); return; }
+      const ser = n * tb;
+      showBox("out-serial",
+        "<b>Serial = " + fmtDec(ser) + " " + nome + " · Paralelo = " + fmtDec(tb) + " " + nome + "</b>" +
+        "<div class='passos'>tserial = n × tbit = " + fmtDec(n) + " × " + fmtDec(tb) + " = " + fmtDec(ser) + " " + nome +
+        "\ntparalelo = tbit = " + fmtDec(tb) + " " + nome + " (todos os bits ao mesmo tempo)</div>");
+    }
+    function calcAdc() {
+      const l = num("adc");
+      if (!Number.isFinite(l) || l < 0 || l > 1023) {
+        showBox("out-adc", "<b>Leitura de 0 a 1023</b>");
+        return;
+      }
+      const V = (l / 1023) * 5;
+      showBox("out-adc", "<b>" + fmtDec(l) + " → " + fmtDec(Number(V.toPrecision(6))) + " V</b><div class='passos'>V = (leitura / 1023) × 5 = (" + fmtDec(l) + " / 1023) × 5 = " + fmtDec(Number(V.toPrecision(6))) + " V</div>");
+    }
+    function calcVoltAdc() {
+      const V = num("volts");
+      if (!Number.isFinite(V) || V < 0 || V > 5) {
+        showBox("out-adc", "<b>Tensão de 0 a 5 V</b>");
+        return;
+      }
+      const l = Math.round((V / 5) * 1023);
+      showBox("out-adc", "<b>" + fmtDec(V) + " V → leitura ≈ " + l + "</b><div class='passos'>leitura = (V / 5) × 1023 = (" + fmtDec(V) + " / 5) × 1023 ≈ " + l + "</div>");
+    }
+    function calcDelay() {
+      const ms = num("dly");
+      if (!Number.isFinite(ms) || ms < 0) { showBox("out-dly", "<b>Digite o número dentro do delay()</b>"); return; }
+      showBox("out-dly", "<b>delay(" + fmtDec(ms) + ") = " + fmtDec(ms) + " ms = " + fmtDec(ms / 1000) + " s</b>");
+    }
+
+    const hash = location.hash.slice(1);
+    const mapa = {};
+    Object.entries(SUBS).forEach(([b, arr]) => arr.forEach(([id]) => { mapa[id] = b; }));
+    mapa.calc = "calc"; mapa.conteudo = "conteudo"; mapa.questoes = "questoes";
+    if (hash === "calc" || mapa[hash] === "calc") ir("calc", hash === "calc" ? "calc-bin" : hash);
+    else if (mapa[hash] === "questoes") ir("questoes", hash === "questoes" ? "q23" : hash);
+    else if (mapa[hash] === "conteudo") ir("conteudo", hash === "conteudo" ? "analogico" : hash);
+    else ir("conteudo", "analogico");
   </script>
 </body>
 </html>
